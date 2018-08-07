@@ -1,83 +1,66 @@
 'use strict';
+//global variables
+var storeHours = ['','6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
 
-var firstAndPike = {
-  name: 'pike-data',
-  minCust: 23,
-  maxCust: 65,
-  avgCookieSale: 6.3,
-  randCust: randomCustPerHour,
-  cookiesPerHour: cookiesPerHour,
-  cookieTotal: [],
-  totalCookiesData: storeCookieSales,
-  totalCookiesDay: 0,
-};
-var seaTacAirport = {
-  name: 'seatac-data',
-  minCust: 3,
-  maxCust: 24,
-  avgCookieSale: 1.2,
-  randCust: randomCustPerHour,
-  cookiesPerHour: cookiesPerHour,
-  cookieTotal: [],
-  totalCookiesData: storeCookieSales,
-  totalCookiesDay: 0
-};
-var seattleCenter = {
-  name: 'center-data',
-  minCust: 11,
-  maxCust: 38,
-  avgCookieSale: 3.7,
-  randCust: randomCustPerHour,
-  cookiesPerHour: cookiesPerHour,
-  cookieTotal: [],
-  totalCookiesData: storeCookieSales,
-  totalCookiesDay: 0
-};
-var capitolHill = {
-  name: 'cap-data',
-  minCust: 20,
-  maxCust: 38,
-  avgCookieSale: 2.3,
-  randCust: randomCustPerHour,
-  cookiesPerHour: cookiesPerHour,
-  cookieTotal: [],
-  totalCookiesData: storeCookieSales,
-  totalCookiesDay: 0
-};
-var alki = {
-  name: 'alki-data',
-  minCust: 2,
-  maxCust: 16,
-  avgCookieSale: 4.6,
-  randCust: randomCustPerHour,
-  cookiesPerHour: cookiesPerHour,
-  cookieTotal: [],
-  totalCookiesData: storeCookieSales,
-  totalCookiesDay: 0
-};
-function randomCustPerHour() {
+//set-up constructor to build stores
+function Store(name, minCust, maxCust, avgCookieSale) {
+  this.name = name;
+  this.minCust = minCust;
+  this.maxCust = maxCust;
+  this.avgCookieSale = avgCookieSale;
+  this.cookieTotal = [];
+  this.totalCookiesDay = 0;
+}
+Store.prototype.randomCustPerHour = function() {
   return Math.floor(Math.random() * (this.maxCust - this.minCust) + this.minCust);
-}
-function cookiesPerHour () {
-  return (this.randCust() * this.avgCookieSale);
-}
-var storeHours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
-function storeCookieSales() {
-  for(var i=0; i<storeHours.length; i++) {
+};
+Store.prototype.cookiesPerHour = function() {
+  return (this.randomCustPerHour() * this.avgCookieSale);
+};
+Store.prototype.storeCookieSales = function() {
+  var storeRow = document.createElement('tr');
+  var storeLocation = document.createElement('th');
+  storeLocation.textContent = this.name;
+  storeRow.appendChild(storeLocation);
+
+  for(var i=1; i<storeHours.length; i++) {
     var hourlyCookieTotal = Math.ceil(this.cookiesPerHour());
-    var formatingValue = storeHours[i] + ': ' + hourlyCookieTotal + ' cookies';
-    this.cookieTotal[i] = formatingValue;
-    this.totalCookiesDay += hourlyCookieTotal;
-    var storeRevenue = document.getElementById(this.name);
-    var storeEl = document.createElement('li');
-    storeEl.textContent = formatingValue;
-    storeRevenue.appendChild(storeEl);
+    var hourlySalesData = document.createElement('td');
+    hourlySalesData.textContent = hourlyCookieTotal;
+    storeRow.appendChild(hourlySalesData);
   }
-  storeEl.innerText = 'Total: ' + this.totalCookiesDay + ' cookies';
+  document.getElementById('location-sales').appendChild(storeRow);
+};
+
+
+function storeHrs() {
+  var hoursRow = document.createElement('tr');
+  for( var j = 0; j < storeHours.length; j++) {
+    var hours = document.createElement('td');
+    hours.textContent = storeHours[j];
+    hoursRow.appendChild(hours);
+  }
+  document.getElementById('store-hours').appendChild(hoursRow);
 }
 
-firstAndPike.totalCookiesData();
-seaTacAirport.totalCookiesData();
-seattleCenter.totalCookiesData();
-capitolHill.totalCookiesData();
-alki.totalCookiesData();
+//need the total for the cookies sold for each store at every hour
+//display at bottom of table
+// function allStoresHourlySales() {
+//   var salesTotalRow = document.createElement('tr');
+//   for(var k = 1; k < storeHours.length; k++) {
+//     var allCookiesPerHour = reduce(cookiesPerHour[k]);
+//   }
+
+
+var firstAndPike = new Store('1st and Pike', 23, 65, 6.3);
+var seaTacAirport = new Store('SeaTac Airport', 3, 24, 1.2);
+var seattleCenter = new Store('Seattle Center', 11, 38, 3.7);
+var capitolHill = new Store('Capitol Hill', 20, 38, 2.3);
+var alki = new Store('Alki', 2, 16, 4.6);
+
+storeHrs();
+firstAndPike.storeCookieSales();
+seaTacAirport.storeCookieSales();
+seattleCenter.storeCookieSales();
+capitolHill.storeCookieSales();
+alki.storeCookieSales();
