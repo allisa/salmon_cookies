@@ -1,6 +1,6 @@
 'use strict';
 //global variables
-var storeHours = ['','6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
+var storeHours = ['','6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', 'Total'];
 
 //set-up constructor to build stores
 function Store(name, minCust, maxCust, avgCookieSale) {
@@ -23,15 +23,24 @@ Store.prototype.storeCookieSales = function() {
   storeLocation.textContent = this.name;
   storeRow.appendChild(storeLocation);
 
-  for(var i=1; i<storeHours.length; i++) {
+  //starting i at 2 to account for empty string in the beginning
+  // and total string at the end
+  for(var i=2; i<storeHours.length; i++) {
     var hourlyCookieTotal = Math.ceil(this.cookiesPerHour());
+    this.totalCookiesDay += hourlyCookieTotal;
+    this.cookieTotal[i] = hourlyCookieTotal;
     var hourlySalesData = document.createElement('td');
     hourlySalesData.textContent = hourlyCookieTotal;
     storeRow.appendChild(hourlySalesData);
   }
+  console.log(this.cookieTotal);
+  var totalCookiesDay = document.createElement('td');
+  totalCookiesDay.textContent = this.totalCookiesDay;
+  storeRow.appendChild(totalCookiesDay);
+  console.log(this.totalCookiesDay);
+
   document.getElementById('location-sales').appendChild(storeRow);
 };
-
 
 function storeHrs() {
   var hoursRow = document.createElement('tr');
@@ -43,14 +52,30 @@ function storeHrs() {
   document.getElementById('store-hours').appendChild(hoursRow);
 }
 
-//need the total for the cookies sold for each store at every hour
-//display at bottom of table
-// function allStoresHourlySales() {
-//   var salesTotalRow = document.createElement('tr');
-//   for(var k = 1; k < storeHours.length; k++) {
-//     var allCookiesPerHour = reduce(cookiesPerHour[k]);
-//   }
+// display at bottom of table
+//not aligned correctly but it is displaying the totals per hour
+function allStoresHourlySales() {
+  var allCookiesPerHour = 0;
+  var allCookiePerHourData = [];
+  var salesTotalRow = document.createElement('tr');
 
+  for(var k = 2; k < storeHours.length; k++) {
+    allCookiesPerHour += firstAndPike.cookieTotal[k];
+    allCookiesPerHour += seaTacAirport.cookieTotal[k];
+    allCookiesPerHour += seattleCenter.cookieTotal[k];
+    allCookiesPerHour += capitolHill.cookieTotal[k];
+    allCookiesPerHour += alki.cookieTotal[k];
+    allCookiePerHourData.push(allCookiesPerHour);
+    allCookiesPerHour = 0;
+  }
+  for(var m = 0; m < allCookiePerHourData.length; m++) {
+    var salesTotalData = document.createElement('td');
+    salesTotalData.textContent = allCookiePerHourData[m];
+    salesTotalRow.appendChild(salesTotalData);
+  }
+  console.log(allCookiePerHourData);
+  document.getElementById('all-stores-sales-per-hour').appendChild(salesTotalRow);
+}
 
 var firstAndPike = new Store('1st and Pike', 23, 65, 6.3);
 var seaTacAirport = new Store('SeaTac Airport', 3, 24, 1.2);
@@ -64,3 +89,4 @@ seaTacAirport.storeCookieSales();
 seattleCenter.storeCookieSales();
 capitolHill.storeCookieSales();
 alki.storeCookieSales();
+allStoresHourlySales();
