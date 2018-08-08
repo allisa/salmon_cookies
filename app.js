@@ -33,11 +33,11 @@ Store.prototype.storeCookieSales = function() {
     hourlySalesData.textContent = hourlyCookieTotal;
     storeRow.appendChild(hourlySalesData);
   }
-  console.log(this.cookieTotal);
+  //console.log(this.cookieTotal);
   var totalCookiesDay = document.createElement('td');
   totalCookiesDay.textContent = this.totalCookiesDay;
   storeRow.appendChild(totalCookiesDay);
-  console.log(this.totalCookiesDay);
+  //console.log(this.totalCookiesDay);
 
   document.getElementById('location-sales').appendChild(storeRow);
 };
@@ -57,6 +57,7 @@ function storeHrs() {
 function allStoresHourlySales() {
   var allCookiesPerHour = 0;
   var allCookiePerHourData = [];
+  var grandTotalSales = 0;
 
   for(var k = 2; k < storeHours.length; k++) {
     allCookiesPerHour += firstAndPike.cookieTotal[k];
@@ -68,12 +69,37 @@ function allStoresHourlySales() {
     allCookiesPerHour = 0;
   }
   for(var m = 0; m < allCookiePerHourData.length; m++) {
-    var salesTotalData= document.createElement('td'); salesTotalData.textContent = allCookiePerHourData[m];
+    var salesTotalData = document.createElement('td');
+    salesTotalData.textContent = allCookiePerHourData[m];
     document.getElementById('all-stores-sales-per-hour').appendChild(salesTotalData);
+    grandTotalSales += allCookiePerHourData[m];
   }
-  if(m === allCookiePerHourData.length)
-  console.log(allCookiePerHourData);
+  allCookiePerHourData.push(grandTotalSales);
+  var allSalesTotalData = document.createElement('td');
+  allSalesTotalData.textContent = grandTotalSales;
+  document.getElementById('all-stores-sales-per-hour').appendChild(allSalesTotalData);
+
+  //console.log(grandTotalSales);
+  //console.log(allCookiePerHourData);
 }
+
+// //when user submits a form, display in table
+var formElt = document.getElementById('store-form');
+formElt.addEventListener('submit', function(e) {
+  e.preventDefault(); //don't do default behavior
+  console.log('form submitted');
+  var storeCreatedFromForm = new Store(e.target.name.value, e.target.minCust.value, e.target.maxCust.value, e.target.avgSale.value);
+});
+
+// var formElt = document.getElementById('person form');
+// formElt.addEventListener('submit', function(e) {  //setting up for submission
+//   e.preventDefault(); //don't do default behavior
+//   //do console log to make sure it's Sworking
+//   var personCreateForm = nre personalbar(e.target.name.value, ...); //reach into dom page to pull out the values entered on the form
+//   personCreateForm.addinfo(); //values entered into form
+
+// });
+
 var firstAndPike = new Store('1st and Pike', 23, 65, 6.3);
 var seaTacAirport = new Store('SeaTac Airport', 3, 24, 1.2);
 var seattleCenter = new Store('Seattle Center', 11, 38, 3.7);

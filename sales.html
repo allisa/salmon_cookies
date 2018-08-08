@@ -21,8 +21,34 @@
           <tr id = "all-stores-sales-per-hour">
               <td>Totals</td>
           </tr>
+          <td></td>
         </tfoot>
       </table>
+    </section>
+    <section>
+      <form id="store-form">
+        <fieldset>
+          <div>
+            <label for="name">Enter Store Name</label>
+            <input type="text" id="location-name" name="name" required/> 
+          </div>
+          <div>
+            <label for="min-cust">Enter Minimum Customers</label>
+            <input type="number" id="min-cust" name="minCust" required/> 
+          </div>
+          <div>
+            <label for="max-cust">Enter Maximum Customers</label>
+            <input type="number" id="max-cust" name="maxCust" required/> 
+          </div>
+          <div>
+            <label for="min-cust">Enter Average Cookie Sale</label>
+            <input type="number" id="avg-sale" name="avgSale" required/> 
+          </div>
+        </fieldset>
+        <div>
+          <input type="submit" value="Add Store"/>
+        </div>
+      </form>
     </section>
   </main>
   <script src="app.js"></script>
