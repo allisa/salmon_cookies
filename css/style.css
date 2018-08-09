@@ -8,7 +8,7 @@ td, th {
 }
 table {
   border: solid black 3px;
-  background-color: #FA8072;
+  background-color: rgba(255, 151, 139, 0.966);
   margin: 20px;
   table-layout: fixed;
 }

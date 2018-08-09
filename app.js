@@ -15,7 +15,7 @@ function Store(name, minCust, maxCust, avgCookieSale) {
   allStores.push(this);
 }
 Store.prototype.randomCustPerHour = function() {
-  return Math.floor(Math.random() * (this.maxCust - this.minCust) + this.minCust);
+  return Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust);
 };
 Store.prototype.cookiesPerHour = function() {
   return (this.randomCustPerHour() * this.avgCookieSale);
@@ -93,12 +93,12 @@ var formElt = document.getElementById('store-form');
 formElt.addEventListener('submit', function(e) {
   e.preventDefault(); //don't do default behavior
   console.log('form submitted');
-  var storeCreatedFromForm = new Store(e.target.name.value, e.target.minCust.value, e.target.maxCust.value, e.target.avgSale.value);
+  var storeCreatedFromForm = new Store(e.target.name.value, Number(e.target.minCust.value), Number(e.target.maxCust.value), Number(e.target.avgSale.value));
   storeCreatedFromForm.storeCookieSales();
   allStoresHourlySales();
 });
 
-var firstAndPike = new Store('1st and Pike', 23, 65, 6.3);
+var firstAndPike = new Store('1st and Pike', 23, 65, 6,3);
 var seaTacAirport = new Store('SeaTac Airport', 3, 24, 1.2);
 var seattleCenter = new Store('Seattle Center', 11, 38, 3.7);
 var capitolHill = new Store('Capitol Hill', 20, 38, 2.3);
