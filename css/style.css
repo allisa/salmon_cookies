@@ -1,31 +1,134 @@
 body {
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Inconsolata', monospace, Arial, Helvetica, sans-serif;
   background-color: #2186b4;
+  margin: 0 auto;
+}
+main, nav {
+  margin: 30px;
 }
 td, th {
   padding: 1em;
   border: solid black 1px;
 }
+tr:hover {
+  background-color: rgba(255, 171, 161, 0.966);
+}
 table {
   border: solid black 3px;
-  background-color: rgba(255, 151, 139, 0.966);
-  margin: 20px;
+  background-color: rgba(253, 185, 177, 0.966);
+  margin: 20px auto;
   table-layout: fixed;
+  font-family: serif;
+  max-width: 700px;
 }
 form {
   margin: 20px;
 }
 h1 {
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 32px;
+}
+header {
   text-align: center;
   font-size: 30px;
-  padding: 10px;
-  margin-top: 20px;
+  padding: 20px;
+  margin: 25px;
 }
 .salmon-image {
-  max-width: 100%px;
+  max-width: 200px;
   height: auto;
+  margin-top: 20px;
 }
-div {
+footer {
   text-align: center;
-  margin: 30px;
+
+}
+nav {
+  background-color: rgb(255, 128, 113);
+  text-align: right;
+}
+nav li {
+  font-size: 18px;
+  line-height: 45px;
+  display: inline;
+  margin: 20px;
+}
+li a:hover {
+  color: #2186b4;
+}
+.family-image {
+  max-width: 300px;
+  display: inline-block;
+  border-radius: 6px;
+}
+p {
+  display: inline-block;
+  max-width: 500px;
+  margin: 10px;
+  font-display: serif;
+}
+li {
+  font: serif;
+}
+h2 {
+  text-align: center;
+  font-size: 28px;
+  margin: 20px;
+  font-family: 'Shadows Into Light', cursive;
+}
+.section-banner {
+  background-color: white;
+  border: 2px solid salmon;
+  margin: 20px -50%;
+  width: 100%;
+  padding: 5px 50%;
+}
+.chinook-image {
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
+  display: block;
+}
+h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: 'Shadows Into Light', cursive;
+}
+.store-name {
+  display: inline-block;
+  border: 2px solid salmon;
+  padding: 20px;
+  margin: 8px;
+}
+.cookie-recipe {
+  display: inline-block;
+  margin: 20px;
+  max-width: 200px;
+  text-align: center;
+}
+.cookie-images {
+  max-width: 200px;
+  border-radius: 6px;
+}
+.recipe-container {
+  margin: 0 auto;
+  max-width: 800px;
+}
+footer {
+  background-color: white;
+  border-top: 2px solid salmon;
+  margin: 0 auto;
+}
+.footer-container {
+  max-width: 800px;
+}
+
+.merch-image {
+  max-width: 150px;
+}
+.footer-elements {
+  display: inline-block;
+  margin: 20px;
+  max-width: 200px;
+  text-align: center;
 }
